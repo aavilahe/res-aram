@@ -1,0 +1,44 @@
+\documentclass{res-aram}
+\usepackage{blindtext}
+\usepackage{lua-visual-debug}
+
+
+\address{%
+    My Workplace\\
+    123 FourFiveSix Street\\
+    My City, ST, 123456
+}
+
+\email{a.shortname@server.fake}
+
+\name[a. shortname]{quite long-name}
+
+\begin{document}
+\section*{Contact}
+\theaddress
+\section*{Education}
+\experience{Job1}{City}{year--year}
+\jobtitle{Jobtitle}{}
+\jobdesc{\blindtext}
+\jobtitle{Jobtitle}{w. dates}
+\begin{CVdescription}
+        \award[*]{Best Thing \emph{(Potato)}}{year}
+\end{CVdescription}
+
+
+\section*{More}
+\experience{Job2}{City2}{year--year}
+\jobdesc{%
+    \begin{CVdescription}
+    \item[x] item one
+        \begin{CVitemize}
+            \item item a
+            \item item b
+        \end{CVitemize}
+    \item[y] item two
+    \item[z] item three
+    \end{CVdescription}
+}
+
+\end{document}
+
