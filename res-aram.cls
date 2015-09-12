@@ -32,6 +32,7 @@
 \RequirePackage{xcolor}            % gray text?
 \RequirePackage{etoolbox}          % \ifstrempty, etc...
 \RequirePackage{trimspaces}        % trim spaces in address
+\RequirePackage{lastpage}          % gets last page number
 
 % More formatting
 \raggedbottom
@@ -87,14 +88,14 @@
         %\removelinebreaks{\theaddress}
     }
     \fancyhead[L]{{\LARGE\bfseries \@name}}
-    \fancyhead[R]{{\itshape p.~\thepage}}
+    \fancyhead[R]{{\itshape p.~\thepage~of~\pageref*{LastPage}}}
 }
 
 \fancypagestyle{CVsimple}{%
     \fancyhf{}
     \renewcommand{\headrulewidth}{0.1pt}
     \renewcommand{\footrulewidth}{0pt}
-    \fancyhead[R]{{\itshape \@shortname~p.~\thepage}}
+    \fancyhead[R]{{\itshape \@shortname~~p.~\thepage~of~\pageref*{LastPage}}}
 }
 
 \pagestyle{CVsimple}
