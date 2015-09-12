@@ -1,18 +1,23 @@
+\PassOptionsToPackage{bottom=0.5in}{geometry}
 \documentclass{res-aram}
 %\usepackage{lua-visual-debug}
 \usepackage{relsize}  % for typsetting C++ \Cpp
-\usepackage{hyperref}  % for links
+\usepackage[colorlinks=true]{hyperref}  % for links
 
 % C++
 \newcommand\Cpp{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\relsize{-3}{\textbf{++}}}}
 
-\name[A. Avila-Herrera]{Aram Avila-Herrera}
+% Publication title with link
+\newcommand{\articletit}[2]{%
+    \href{#1}{\textit{#2}}}
+
+\name[A. Avila-Herrera]{Aram Avila-Herrera, PhD}
 \address{
     The J. David Gladstone Institutes\\
     1650 Owens Street\\
     San Francisco, California 94158-2261
 }
-\email{aram.avila-herrera@ucsf.edu}
+\email{aram.avilaherrera@gladstone.ucsf.edu}
 
 \begin{document}
 
@@ -37,8 +42,8 @@
     \end{CVdescription}
     \begin{CVitemize}
         \item Benchmarked coevolution methods in predicting residue
-            contacts in co-crystal structures
-        \item Assesed control of false positive rate of contact
+            contacts in co-crystal structures from sequence alignments
+        \item Assessed control of false positive rate of contact
             predictions under various null models
         \item Estimated coevolution in HIV-human protein interaction
             network
@@ -73,10 +78,12 @@
             \end{CVinline}
         \item[Statistical Programing:]
             \begin{CVinline}
+                \item machine learning
                 \item hypothesis testing
                 \item regression analysis
-                \item bayesian inference
-                \item machine learning
+                \item Bayesian inference
+                \item probabilistic graphical modeling
+                \item clustering
             \end{CVinline}
     \end{CVdescription}
     \begin{CVdescription}
@@ -97,7 +104,7 @@
 }
 
 
-\section*{Publications and Presentations}  % redo these later with biber/biblatex
+\section*{Publications}  % redo these later with biber/biblatex
 \jobdesc[*]{
     \begin{CVdescription}[itemsep=0.5ex]
         \item \textbf{Avila-Herrera A}. \textit{Statistical evaluation of
@@ -105,19 +112,26 @@
             (Doctoral dissertation). University of California, San Francisco.
             2015.
 
-        \item \textbf{Avila-Herrera A}, Pollard K. \textit{Coevolutionary
-            analyses require phylogenetically deep alignments and better null
-            models to accurately detect inter-protein contacts within and between
-            species}. Submitted to BMC Bioinformatics Feb 2015.
+        \item \textbf{Avila-Herrera A}, Pollard K.
+            \articletit{http://doi.org/10.1186/s12859-015-0677-y}{Coevolutionary
+            analyses require phylogenetically deep alignments and better
+            null models to accurately detect inter-protein contacts within
+            and between species}. BMC Bioinformatics August 2015 16:268
 
         \item Roan NR, Liu H, Usmani SM, Neidleman J, M\"uller JA,
             \textbf{Avila-Herrera A}, Gawanbacht A, Zirafi O, Chu S, Dong M,
             Kumar ST, Smith JF, Pollard KS, F\"andrich M, Kirchhoff F, M\"unch
-            J, Witkowska HE, Greene WC. \textit{Liquefaction of semen generates
-            and later degrades a conserved semenogelin peptide that
-            enhances HIV infection}. Journal of Virology July 2014 88:13
-            7221-7234.
+            J, Witkowska HE, Greene WC.
+            \articletit{http://doi.org/10.1128/JVI.00269-14}{Liquefaction of
+            semen generates and later degrades a conserved semenogelin
+            peptide that enhances HIV infection}. Journal of Virology July 2014
+            88:13 7221-7234.
+    \end{CVdescription}
+}
 
+\section*{Presentations}
+\jobdesc[*]{
+    \begin{CVdescription}[itemsep=0.5ex]
         \item \textbf{Avila-Herrera A}, Hernandez R, Krogan N, Pollard K.
             \textit{Measuring correlated evolution in HIV-human protein
             complexes}. Poster presented at XVIth Bay Area Microbial
@@ -127,7 +141,7 @@
             methods used to identify coevolving residues between proteins}.
             Poster presented at 14th Biomedical Computation at Stanford
             Symposium, 2014 Stanford, CA
-\end{CVdescription}
+    \end{CVdescription}
 }
 
 
@@ -177,6 +191,32 @@
     activity demonstrating the importance of HIV-testing.
 }
 
+\section*{Professional Development}
+\experience{American Heart Association}{San Francisco, CA}{Sept 2014}
+\jobtitle{Heart Walk Team Leader}{}
+\jobdesc{%
+    Built a team to fundraise and participate in the
+    2014 Bay Area Heart Walk.
+}
+
+\experience[*]{CATALYST Awards Student Internship Program}{UCSF}{Fall 2013}
+\jobtitle{Student Intern}{}
+\jobdesc{%
+    Worked with academic and industry experts to review funding proposals in
+    translational research for
+    \begin{CVitemize}
+        \item Unmet need
+        \item Commercialization potential
+        \item Development feasibility
+    \end{CVitemize}
+}
+
+\experience[*]{Graduate Student Internships and Career Exploration}{UCSF}{}
+\jobtitle{2012 Cohort}{}
+\jobdesc{%
+    Participated in career exploration and professional development workshops.
+}
+
 \section*{Additional Laboratory Experience}
 \experience{University of California San Francisco}{}{}
 \jobtitle{Rotations}{(2009--2010)}
@@ -212,12 +252,15 @@
 
 \section*{Other}
 \jobdesc[*]{%
-    \begin{CVdescription}
-        \item[Github:] \href{https://github.com/aavilahe}{aavilahe}
-        \item[Foreign Languages:] Fluent in Spanish and proficient in French.
-        \item[Athletics:] Participated in Santa Cruz Half Marathon
-            \emph{(2010)}, Marin Century (50km) \emph{(2010)}, and Alcatraz
-            Challenge \emph{(2012)}.
-    \end{CVdescription}
+\begin{CVdescription}
+    \item[Github:] \href{https://github.com/aavilahe}{aavilahe}
+    \item[Prog. \& Markup Languages:] Ruby, JavaScript, CoffeeScript;
+        Markdown, \LaTeX, XML, HTML5, CSS, Stylus
+    \item[Visualization:] ggplot2, lattice, matplotlib, D3.js
+    \item[Foreign Languages:] Fluent in Spanish and proficient in French.
+    \item[Athletics:] Participated in Santa Cruz Half Marathon
+        \emph{(2010)}, Marin Century (50km) \emph{(2010)}, and Alcatraz
+        Challenge \emph{(2012)}.
+\end{CVdescription}
 }
 \end{document}
