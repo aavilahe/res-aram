@@ -37,10 +37,10 @@
 % More formatting
 \raggedbottom
 
-% Description and dates lengths
-\newcommand{\descrscale}{0.8}
-%\newcommand{\datesscale}{1}  % needed for using varwidth or tabular* to control description width
-%\FPsub{\datesscale}{1}{\descrscale}  % needed to set proper tabular* widths
+% Body and Margin proportions (for description and dates)
+\newcommand{\BodyScale}{0.8}
+%\newcommand{\MarginScale}{1}  % needed for using varwidth or tabular* to control body and margin widths
+%\FPsub{\MarginScale}{1}{\BodyScale}  % needed to set proper tabular* widths
 
 % Maybe use to put address on one line?
 % "\\" line breaks to ", " for \mbox{}es
@@ -52,10 +52,12 @@
 
 % Definitions ------------------------------------------------------------------
 % Address, emails, names, ...
-\newcommand{\theaddress}{}
 \newcommand{\@name}{}
 \newcommand{\@shortname}{}
-\newcommand{\theemail}{}
+\newcommand{\theaddress}{}   % exported
+\newcommand{\theemail}{}     % exported
+\newcommand{\thesocial}{}    % exported
+\newcommand{\thephone}{}     % exported
 
 \newcommand{\address}[1]{%
     \renewcommand{\theaddress}{\trim@spaces{#1}}
@@ -63,6 +65,14 @@
 
 \newcommand{\email}[1]{%
     \renewcommand{\theemail}{#1}
+}
+
+\newcommand{\social}[1]{%
+    \renewcommand{\thesocial}{#1}
+}
+
+\newcommand{\phone}[1]{%
+    \renewcommand{\thephone}{#1}
 }
 
 % Optionally set a short name
@@ -77,14 +87,55 @@
 
 
 % Pagestyle --------------------------------------------------------------------
+
+% Place contact info in header .................................................
+\newcommand{\LeftContactInfo}{%   % Goes inside a minipage
+    \theemail\\
+    \thesocial\\
+    \vspace{0.5ex}
+    \thephone%
+}
+\newcommand{\PlaceLeftContactInfo}[1]{%
+    \renewcommand{\LeftContactInfo}{#1}%
+}
+
+\newcommand{\RightContactInfo}{%  % Goes inside a minipage
+    \theaddress%
+}
+\newcommand{\PlaceRightContactInfo}[1]{%
+    \renewcommand{\RightContactInfo}{#1}%
+}
+
+\newcommand{\headercontact}{%
+    \begin{minipage}[t]{0.4\linewidth}
+        {\raggedright \LeftContactInfo\par}% 
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.4\linewidth}
+        {\raggedleft \RightContactInfo\par}%
+    \end{minipage}%
+}
+
+% Add extra space for contact info to header
+\newlength\@oldheadsep
+\setlength{\@oldheadsep}{\headsep}
+
+\newlength{\@contactheight}
+\setlength{\@contactheight}{\headsep}
+\newcommand{\ContactHeight}[1]{%
+    \setlength{\@contactheight}{\headsep + #1}
+}
+% .............................................................................. 
+
 \fancypagestyle{CVfancytitle}{%
     \fancyhf{}
+    \setlength{\headsep}{\@contactheight}  % modify headsep
     \renewcommand{\headrulewidth}{0.1pt}
     \renewcommand{\footrulewidth}{0pt}
     \renewcommand{\headrule}{%
         \hrule width\headwidth
         \vspace{2pt}
-        \textcolor{black!50}{\theemail} \hfill
+        \textcolor{black!50}{\small \headercontact}%
         %\removelinebreaks{\theaddress}
     }
     \fancyhead[L]{{\LARGE\bfseries \@name}}
@@ -93,6 +144,7 @@
 
 \fancypagestyle{CVsimple}{%
     \fancyhf{}
+    \setlength{\headsep}{\@oldheadsep}  % reset headsep
     \renewcommand{\headrulewidth}{0.1pt}
     \renewcommand{\footrulewidth}{0pt}
     \fancyhead[R]{{\itshape \@shortname~~p.~\thepage~of~\pageref*{LastPage}}}
@@ -112,71 +164,75 @@
 
 
 % Body formatting  -------------------------------------------------------------
-% Add text to body and right margin
+% Places text in document body, extending to right margin (eg. for dates)
 
+% ..............................................................................
 % Format using fixed width tabular*
-% All entries have same maximum widths, long "#2"s wrap nicely
+% - Long "#2"s wrap nicely
+% - All entries have same maximum widths and make indented entries stick out
+%
 %\newcolumntype{R}[1]{>{\RaggedLeft\hspace{0pt}}p{#1}}
 %\newcolumntype{L}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
 %\newcommand{\@BMentry}[3][]{%
 %    \@ifstrequal{#1}{*}{\noindent}{}%
 %    \begin{tabular*}{\linewidth}[t]{%
-%        @{}L{\descrscale\linewidth}%
-%        @{\extracolsep{\fill}}R{\datesscale\linewidth}%
+%        @{}L{\BodyScale\linewidth}%
+%        @{\extracolsep{\fill}}R{\MarginScale\linewidth}%
 %    }
 %        #2 & #3 \\
 %    \end{tabular*}
 %}
 
-% Format using variable width minipages (but no vertical alignment)
+% Format using variable width minipages
+% - No vertical alignment
+%
 %\newcommand{\@BMentry}[3][]{%
 %    \@ifstrequal{#1}{*}{\noindent}{}%
-%    \begin{varwidth}{\descrscale\linewidth}
+%    \begin{varwidth}{\BodyScale\linewidth}
 %        {\raggedright #2}
 %    \end{varwidth}
 %    \hfill
-%    \begin{varwidth}{\datesscale\linewidth}
+%    \begin{varwidth}{\MarginScale\linewidth}
 %        {\raggedleft #3}
 %    \end{varwidth}
 %    \newline
 %}
+% ..............................................................................
 
-% Format using a simple hfill, long entries get ugly formatting
+% Format using a simple hfill
+% - Long entries get ugly formatting
+%
 % Use optional argument [*] to suppress indent (not needed following a new section)
 \newcommand{\@BMentry}[3][]{%
+    % [*], Body, Margin
     \@ifstrequal{#1}{*}{\noindent}{}%
     #2 \hfill #3\newline
 }
 
 \newcommand{\@employer}[2]{%
+    % Employer, City
     \textbf{#1}\ifstrempty{#2}{}{, #2}
 }
 
 \newcommand{\experience}[4][]{%
-    % *, Employer, City, Dates
+    % [*], Employer, City, Dates
     \@BMentry[#1]{\@employer{#2}{#3}}{#4}
 }
 
-% awards are now list items for `description' type lists
-%\newcommand{\award}[3][]{%
-%    % *, Award, Date
-%    \@BMentry[#1]{#2}{#3}
-%}
-
 \newcommand{\jobtitle}[3][]{%
-    % *, Title, Dates
+    % [*], Title, Dates
     \@BMentry[#1]{\textit{#2}}{\textit{#3}}
 }
 
-\newcommand{\jobdesc}[2][]{%
+\newcommand{\jobdescription}[2][]{%
+    % [*], Body
     \@ifstrequal{#1}{*}{}{\hspace*{1em}}
-    \begin{minipage}[t]{\descrscale\linewidth}
+    \begin{minipage}[t]{\BodyScale\linewidth}
         \raggedright
         {#2}
     \end{minipage}
     \newline
 }
-
 
 % Lists ------------------------------------------------------------------------
 \newlist{CVitemize}{itemize}{3}

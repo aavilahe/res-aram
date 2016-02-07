@@ -1,64 +1,111 @@
 \PassOptionsToPackage{bottom=0.5in}{geometry}
 \documentclass{res-aram}
 %\usepackage{lua-visual-debug}
-\usepackage{relsize}  % for typsetting C++ \Cpp
+\usepackage{relsize}                    % for typsetting C++ \Cpp
 \usepackage[colorlinks=true]{hyperref}  % for links
+\usepackage{fontawesome}
 
+%% Helper macros ---------------------------------
 % C++
 \newcommand\Cpp{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\relsize{-3}{\textbf{++}}}}
 
 % Publication title with link
-\newcommand{\articletit}[2]{%
-    \href{#1}{\textit{#2}}}
+\newcommand{\articletitle}[2]{%
+    \href{#1}{\textit{#2}}%
+}
 
+% github
+\newcommand{\gh}{%
+    \href{https://github.com/aavilaherrera}{\faicon{github}: aavilaherrera}%
+}
+
+% linkedin
+\newcommand{\li}{%
+    \href{http://www.linkedin.com/in/aramavilaherrera}{\faicon{linkedin}: aramavilaherrera}%
+}
+%% -----------------------------------------------
+
+
+%% Set Contact info ------------------------------
 \name[A. Avila-Herrera]{Aram Avila-Herrera, PhD}
-\address{
+\address{%
     The J. David Gladstone Institutes\\
     1650 Owens Street\\
     San Francisco, California 94158-2261
 }
 \email{aram.avilaherrera@gladstone.ucsf.edu}
+\social{\li\\
+       \gh%
+}
+%\phone{(555)-555-555}
+%% -----------------------------------------------
+
+
+% Override default placements in the header
+\ContactHeight{4ex}
+\PlaceLeftContactInfo{%
+    % here goes the left
+    %
+    \thesocial
+}
+\PlaceRightContactInfo{%
+    % here goes the right
+    %
+    %\thephone
+    \theemail\\
+    \href{https://aavilaherrera.github.io}{aavilaherrera.github.io}
+}
 
 \begin{document}
 
 \section*{Summary}
-\jobdesc[*]{%
-    {\bfseries Computational biologist} taking an evolutionary approach to
-    understanding molecular interactions, especially those
+\jobdescription[*]{%
+    {\bfseries Computational biologist} investigating evolutionary approaches to
+    understand molecular interactions, especially those
     between hosts and their pathogens.
+
+    \medskip
+    I have 9 years of training, including experience in:
+    \begin{CVitemize}
+        \item Benchmarking classification algorithms
+        \item High-performance computing for analyzing large data sets
+        \item Developing bioinformatics pipelines
+    \end{CVitemize}
 }
 
-
-\section*{Contact}
-\theaddress
-
-
 \section*{Education and Training}
-\experience{University of California San Francisco}{San Francisco, CA}{2009--2015}
-\jobdesc[*]{%
+\experience{J David Gladstone Institutes}{San Francisco, CA}{2015--2016}
+\jobdescription[*]{%
     \begin{CVdescription}[labelindent=1em]
-        \item[PhD] in Biological and Medical Informatics\\
+        \item[Bioinformatics Fellow] --- Supervisor: Katherine Pollard
+    \end{CVdescription}
+    \begin{CVitemize}
+        \item Identified associations between environmental variables and microbial genes
+              in human and oceanic metagenomic data
+    \end{CVitemize}
+}
+
+\experience[*]{University of California San Francisco}{San Francisco, CA}{2009--2015}
+\jobdescription[*]{%
+    \begin{CVdescription}[labelindent=1em]
+        \item[PhD] in Biological and Medical Informatics ---
                    Adviser: Katherine Pollard
     \end{CVdescription}
     \begin{CVitemize}
-        \item Benchmarked coevolution methods in predicting residue
-            contacts in co-crystal structures from sequence alignments
-        \item Assessed control of false positive rate of contact
-            predictions under various null models
-        \item Estimated coevolution in HIV-human protein interaction
-            network
+        \item Characterized statistical performance of coevolution methods
+              in predicting structural contacts between proteins
     \end{CVitemize}
 }
 
 \experience[*]{University of California Santa Cruz}{Santa Cruz, CA}{2005--2009}
-\jobdesc[*]{%
+\jobdescription[*]{%
     \begin{CVdescription}[labelindent=1em]
         \item[BS] in Bioinformatics
     \end{CVdescription}
 }
 
 \section*{Computational Biology Skillset}
-\jobdesc[*]{%
+\jobdescription[*]{%
     \begin{CVdescription}
         \item[Molecular Evolution:]
             \begin{CVinline}
@@ -76,7 +123,7 @@
                 \item visualization
                 \item amyloidogenic peptide prediction
             \end{CVinline}
-        \item[Statistical Programing:]
+        \item[Statistical Programming:]
             \begin{CVinline}
                 \item machine learning
                 \item hypothesis testing
@@ -86,6 +133,7 @@
                 \item clustering
             \end{CVinline}
     \end{CVdescription}
+    \smallskip
     \begin{CVdescription}
         \item[Programming Languages:]
             \begin{CVinline}
@@ -95,17 +143,24 @@
                 \item SQL
                 \item Perl
                 \item C
-                \item \Cpp
                 \item Java
-                \item MATLAB
-                \item ROOT
+                \item \Cpp
+            \end{CVinline}
+        \item[Data Science:]
+            \begin{CVinline}
+                \item pandas
+                \item data.table
+                \item dplyr
+                \item tidyr
+                \item scipy
+                \item numpy
+                \item scikit-learn
             \end{CVinline}
     \end{CVdescription}
 }
 
-
 \section*{Publications}  % redo these later with biber/biblatex
-\jobdesc[*]{
+\jobdescription[*]{
     \begin{CVdescription}[itemsep=0.5ex]
         \item \textbf{Avila-Herrera A}. \textit{Statistical evaluation of
             coevolution methods for predicting inter-protein contacts}
@@ -113,7 +168,7 @@
             2015.
 
         \item \textbf{Avila-Herrera A}, Pollard K.
-            \articletit{http://doi.org/10.1186/s12859-015-0677-y}{Coevolutionary
+            \articletitle{http://doi.org/10.1186/s12859-015-0677-y}{Coevolutionary
             analyses require phylogenetically deep alignments and better
             null models to accurately detect inter-protein contacts within
             and between species}. BMC Bioinformatics August 2015 16:268
@@ -122,7 +177,7 @@
             \textbf{Avila-Herrera A}, Gawanbacht A, Zirafi O, Chu S, Dong M,
             Kumar ST, Smith JF, Pollard KS, F\"andrich M, Kirchhoff F, M\"unch
             J, Witkowska HE, Greene WC.
-            \articletit{http://doi.org/10.1128/JVI.00269-14}{Liquefaction of
+            \articletitle{http://doi.org/10.1128/JVI.00269-14}{Liquefaction of
             semen generates and later degrades a conserved semenogelin
             peptide that enhances HIV infection}. Journal of Virology July 2014
             88:13 7221-7234.
@@ -130,7 +185,7 @@
 }
 
 \section*{Presentations}
-\jobdesc[*]{
+\jobdescription[*]{
     \begin{CVdescription}[itemsep=0.5ex]
         \item \textbf{Avila-Herrera A}, Hernandez R, Krogan N, Pollard K.
             \textit{Measuring correlated evolution in HIV-human protein
@@ -158,21 +213,21 @@
 \section*{Teaching and Mentorship}
 \experience{School of Pharmacy}{University of California San Francisco}{Fall 2010}
 \jobtitle{Teaching Assistant}{}
-\jobdesc{%
+\jobdescription{%
     Developed course material, led weekly lecture discussions, held office
     hours, and administrated course website for: Biostatistics (BPS 112).
 }
 
 \experience[*]{Integrated Program in Quantitative Biology}{UCSF}{(Falls) 2010--2012}
 \jobtitle{Bootcamp Bioinformatics Leader}{}
-\jobdesc{%
+\jobdescription{%
     Responsible for the organization and design of three-day theoretical and
     applied bioinformatics crash course. Prepared simulated data sets for
     coursework and led journal club discussions.
 }
 
 \jobtitle[*]{Bootcamp Instructor}{}
-\jobdesc{%
+\jobdescription{%
     Gave introductory lectures on probability and statistics to incoming
     students from diverse fields.
 }
@@ -180,47 +235,49 @@
 \smallskip
 \experience[*]{Minority Graduate Student Organization}{UCSF}{2012--present}
 \jobtitle{Peer Mentor}{}
-\jobdesc{%
+\jobdescription{%
     Provide longterm mentorship for new students.
 }
 
 \experience[*]{Science Education and Outreach}{Gladstone Institutes}{Dec.~2014}
 \jobtitle{Guest lecturer}{}
-\jobdesc{Lesson on the biology, prevention, and history of
-    HIV/AIDS to students of Balboa High School, San Francisco. Led hands on
-    activity demonstrating the importance of HIV-testing.
+\jobdescription{%
+    Co-led lesson and hands-on activity on HIV/AIDS biology,
+    prevention, and history to students of Balboa High School, San Francisco.
 }
 
 \section*{Professional Development}
 \experience{American Heart Association}{San Francisco, CA}{Sept 2014}
 \jobtitle{Heart Walk Team Leader}{}
-\jobdesc{%
+\jobdescription{%
     Built a team to fundraise and participate in the
     2014 Bay Area Heart Walk.
 }
 
 \experience[*]{CATALYST Awards Student Internship Program}{UCSF}{Fall 2013}
 \jobtitle{Student Intern}{}
-\jobdesc{%
-    Worked with academic and industry experts to review funding proposals in
+\jobdescription{%
+    Reviewed funding proposals with academic and industry experts in
     translational research for
-    \begin{CVitemize}
-        \item Unmet need
-        \item Commercialization potential
-        \item Development feasibility
-    \end{CVitemize}
+    \emph{%
+        unmet need,
+        commercialization potential,%
+    } and
+    \emph{%
+        development feasibility%
+    }.
 }
 
 \experience[*]{Graduate Student Internships and Career Exploration}{UCSF}{}
 \jobtitle{2012 Cohort}{}
-\jobdesc{%
+\jobdescription{%
     Participated in career exploration and professional development workshops.
 }
 
 \section*{Additional Laboratory Experience}
 \experience{University of California San Francisco}{}{}
 \jobtitle{Rotations}{(2009--2010)}
-\jobdesc[*]{%
+\jobdescription[*]{%
     \begin{CVitemize}
     \item \textit{P. falciparum} culture, RNA-protein coimmunoprecipitation,
         and RNA isolation
@@ -231,7 +288,7 @@
 
 \jobtitle[*]{Integrated Program in Quantitative Biology Team Challenges}%
             {(Fall~2009, Spring~2010)}
-\jobdesc[*]{%
+\jobdescription[*]{%
     \begin{CVitemize}[nosep]
         \item Microarray expression experiment and analysis
         \item Built rudimentary fluorescence microscope
@@ -240,21 +297,20 @@
 
 \experience[*]{University of California Santa Cruz}{}{}
 \jobtitle{Berman Lab}{(2007--2008)}
-\jobdesc{%
+\jobdescription{%
     Tested sera for immunoreactivity and automated digitization
     of critical biological sequence records.
 }
 
 \jobtitle[*]{MARC Summer Research Institute}{(Summer 2008)}
-\jobdesc{%
+\jobdescription{%
     Diketopiperazine structure determination and arthropod pathogen screening
 }
 
 \section*{Other}
-\jobdesc[*]{%
+\jobdescription[*]{%
 \begin{CVdescription}
-    \item[Github:] \href{https://github.com/aavilahe}{aavilahe}
-    \item[Prog. \& Markup Languages:] Ruby, JavaScript, CoffeeScript;
+    \item[Prog. \& Markup Languages:] JavaScript, CoffeeScript, MATLAB, Ruby;
         Markdown, \LaTeX, XML, HTML5, CSS, Stylus
     \item[Visualization:] ggplot2, lattice, matplotlib, D3.js
     \item[Foreign Languages:] Fluent in Spanish and proficient in French.
